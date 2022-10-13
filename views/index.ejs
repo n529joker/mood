@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('layouts/styles');-%>
+</head>
+<body>
+    <%-include('layouts/nav');-%>
+    <div class="container justify-content-center align-items-center">
+        <h3 class="text-center"><%= locals.date || "Today" %></h3>
+        <h4 class="text-center">How are you feeling?</h4>
+        <div class="card m-auto " style="width: 90%;">
+            <img src="mood.jpg" alt="" class="card-img-top" style="height:55vh;">
+        </div>
+       <button class="lemme my-2"><a href="/lemme">Let me Know</a></button>
+      <button class="todo my-2" ><a href="/todo">Add todo</a></button>
+    </div>
+</body>
+</html>
