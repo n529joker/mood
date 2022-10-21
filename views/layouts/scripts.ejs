@@ -35,14 +35,9 @@
               document.getElementById("all-steps").style.display = "none";
               document.getElementById("register").style.display = "none";
               document.getElementById("text-message").style.display = "block";
-
-
-
-
               }
               showTab(currentTab);
               }
-
               function validateForm() {
                    var x, y, i, valid = true;
                    x = document.getElementsByClassName("tab");
@@ -52,15 +47,12 @@
                            y[i].className += " invalid";
                            valid = false;
                        }
-
-
                    }
                    if (valid) {
                        document.getElementsByClassName("step")[currentTab].className += " finish";
                    }
                    return valid;
                }
-
                function fixStepIndicator(n) {
                    var i, x = document.getElementsByClassName("step");
                    for (i = 0; i < x.length; i++) {
@@ -68,4 +60,22 @@
                    }
                    x[n].className += " active";
                }
+               document.getElementById('add').addEventListener('click',()=>{
+                 Notification.requestPermission().then(perm => {
+                    if(perm === 'granted'){
+                        new Notification('New to do added',{
+                            body: `due ${document.getElementById('time_due').value}`,
+                        })
+                    }
+                 })
+               })
+               document.querySelector('.btn').addEventListener('click',()=>{
+                 Notification.requestPermission().then(perm => {
+                    if(perm === 'granted'){
+                        new Notification('New to do added',{
+                            body: `due ${document.getElementById('time_due').value} Deleted!`,
+                        })
+                    }
+                 })
+               })
 </script>

@@ -9,9 +9,38 @@
 <body>
     <%-include('layouts/nav');-%>
     <div class="container justify-content-center align-items-center">
-        <h3 class="text-center">Add to do</h3>
-        
+    <h3 class="text-center">To Do's</h3>
+    <div class="todo">
+        <%locals.items.forEach(item=>{%>
+        <div class="d-flex justify-content-between mb-3">
+        <button class="lemme"><%=item.task || "No Todo"%> <span class="text-white"><%=item.time %></span></button>
+        <a class="btn btn-danger mx-1 text-white" href="/todo/?delid=<%=item._id%>" ><i class="fa-solid fa-trash"></i></a>
+        </div>
+        <%})%>
+    </div>
+       <form action="/todo" method="post">
+        <div class="container mt-3 mb-3">
+            <div class="row justify-content-md-center m-2">
+                <div class="col col-md-8 mb-2">
+                    <div class="form-floating">
+                        <input type="text" name="task" id="task" required autocomplete="off" class="form-control">
+                        <label for="task">Enter Task to be done</label>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="form-floating">
+                        <input type="time" name="time" id="time_due" class="form-control">
+                        <label for="time">Enter time for reminder</label>
+                    </div> 
+
+                </div>
+            </div>
+        </div>
+        <center><button id="add" class="m-2">Add</button></center>
+    </form>
         <button class="lemme my-2"><a href="/"> < Back </a></button>
     </div>
+    <%-include('layouts/footer');-%>
+    <%-include('layouts/scripts');-%>
 </body>
 </html>

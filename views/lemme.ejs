@@ -9,11 +9,11 @@
 <body>
     <%-include('layouts/nav');-%>
     <div class="container justify-content-center align-items-center">
-        <div class="container mt-5">
+        <div class="container mt-5 mb-5">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-8">
-                    <form id="regForm">
-                        <h3 id="register">Survey Form</h3>
+                    <form id="regForm" action="/lemme" method="post" class="justify-content-center align-items-center">
+                        <h3 id="register">Today</h3>
                         <div class="all-steps" id="all-steps"> 
                           <span class="step"><i class="fa-solid fa-brain"></i></span> 
                           <span class="step"><i class="fa-solid fa-list"></i></span>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="tab">
                           <h6>Significant events today</h6>
-                            <p><input placeholder="events" oninput="this.className = ''" name="activity"></p>
+                            <p><input placeholder="events" oninput="this.className = ''" name="events"></p>
                             
                         </div>
                         <div class="tab">
@@ -53,6 +53,7 @@
                         <div class="tab">
                             <h6>sticker of the day</h6>
                             <p><input placeholder="Favourite Sticker" oninput="this.className = ''" name="sticker"></p>
+                            <p><input type="submit"></p>
                         </div>
                         
                         <div style="overflow:auto;" id="nextprevious">
@@ -69,6 +70,7 @@
       <button class="lemme my-2"><a href="/"> < Back </a></button>
       <button class="todo my-2" ><a href="/todo">Add todo</a></button>
     </div>
+    <%-include('layouts/footer');-%>
     <%-include('layouts/scripts');-%>
 </body>
 </html>
