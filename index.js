@@ -23,16 +23,27 @@ app.get('/',(req, res)=>{
 
 app.get('/todo',async(req, res, next)=>{
    let data = await Todo.find({})
-    data.length==0? res.render('todo.ejs') : res.render('todo.ejs',{items: data}) 
+    if(data.length==0){
+         res.render('todo.ejs') 
+         return
+    }else{
+         res.render('todo.ejs',{items: data})
+         return
+    }
     if(req.query.delid){
         await Todo.deleteOne({_id:req.query.delid})
+        res.render('todo.ejs',{items: data})
     }
-    res.render('todo.ejs',{items: data})
+    
     next()
 })
-
-app.get('/lemme',(req, res)=>{
+app.get('/timer',(req, res, next)=>{
+   res.render('timer.ejs')
+   next()
+})
+app.get('/lemme',(req, res, next)=>{
     res.render('lemme.ejs')
+    next()
 })
 app.post('/todo',async(req, res)=>{
     let {task,time} = req.body
@@ -47,7 +58,7 @@ app.post('/todo',async(req, res)=>{
         }
     }) 
 })
-app.post('/lemme',async(req, res)=>{
+app.post('/lemme',find,async(req, res, next)=>{
     let {activity, events, ideas, progress, asides, sticker} = req.body
     let today={activity,events,ideas,progress,asides}
     await Dairy.create(today, (err, item)=>{ 
@@ -58,8 +69,22 @@ app.post('/lemme',async(req, res)=>{
             res.redirect('/lemme')
         }
     }) 
+    next()
 })
+
+app.get('*',(req, res)=>{
+    res.status(404).send('Page not found')
+})
+
 mongoose.connection.once('open',()=>{
     console.log('Connected to MongoDB')
     app.listen(port,()=>console.log(`live on ${port}`))
 })
+
+
+function find(req, res, next){
+let url = req.originalUrl
+let date = new Date().toISOString()
+console.log(url, date)
+next()
+}

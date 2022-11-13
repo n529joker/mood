@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include('layouts/styles');-%>
+</head>
+<body>
+    <%-include('layouts/nav');-%>
+<button class="btn btn-info" onclick="showResults()">check speed</button>
+    <%-include('layouts/footer');-%>
+    <script>
+        let img = 'http://www.tranquilmusic.ca/images/cats/Cat2.JPG'+'?n='+ Math.random();
+        let startTime, endTime;
+        let dSize = 5616988
+        let download = new Image()
+        download.onload = ()=>{
+            endTime = (new Date()).getTime()
+            showResults()
+        }
+        startTime = (new Date()).getTime()
+                    download.src = img;
+            function showResults(){
+                        let duration = Math.round((endTime - startTime)/1000)
+                        let speedMbps = (((dSize*8)/duration)/1048576).toFixed(2)
+                        console.log(speedMbps)
+                        alert('your connection speed is : '+ speedMbps+'Mbps')
+                    }
+
+    </script>
+</body>
+</html>
